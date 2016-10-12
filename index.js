@@ -66,7 +66,7 @@ function createRock(x) {
    * Now that we have a rock, we'll need to append
    * it to GAME and move it downwards.
    */
-
+   document.getElementById('game').appendChild(rock);
 
   /**
    * This function moves the rock. (2 pixels at a time
@@ -75,6 +75,13 @@ function createRock(x) {
   function moveRock() {
     // implement me!
     // (use the comments below to guide you!)
+    function moveRockDown(){
+      rock.style.top = `${top += 2}px`;
+      if(top < 360){
+        window.requestAnimationFrame(moveRockDown);
+      }
+    } window.requestAnimationFrame(moveRockDown);
+
     /**
      * If a rock collides with the DODGER,
      * we should call endGame()
@@ -89,6 +96,7 @@ function createRock(x) {
      * But if the rock *has* reached the bottom of the GAME,
      * we should remove the rock from the DOM
      */
+
   }
 
   // We should kick of the animation of the rock around here
@@ -119,6 +127,14 @@ function moveDodger(e) {
    * we've declared for you above.)
    * And be sure to use the functions declared below!
    */
+   document.addEventListener('keydown',function(e){
+     if(e.which === LEFT_ARROW){
+       moveDodgerLeft();
+     }
+     else if (e.which=== RIGHT_ARROW){
+       moveDodgerRight();
+     }
+   })
 }
 
 function moveDodgerLeft() {
@@ -127,6 +143,14 @@ function moveDodgerLeft() {
    * This function should move DODGER to the left
    * (mabye 4 pixels?). Use window.requestAnimationFrame()!
    */
+   var leftNumbers = DODGER.style.left.replace('px','');
+   var left = parseInt(leftNumbers, 10);
+   function leftStep(){
+    DODGER.style.left = `${left - 8}px`
+    if (left > 0){
+     window.requestAnimationFrame(leftStep)
+   }
+ } window.requestAnimationFrame(leftStep)
 }
 
 function moveDodgerRight() {
@@ -135,6 +159,14 @@ function moveDodgerRight() {
    * This function should move DODGER to the right
    * (mabye 4 pixels?). Use window.requestAnimationFrame()!
    */
+   var leftNumbers = DODGER.style.left.replace('px','');
+   var left = parseInt(leftNumbers, 10);
+   function rightStep(){
+    DODGER.style.left = `${left + 8}px`
+    if (left < 360){
+      window.requestAnimationFrame(rightStep);
+   }
+ } window.requestAnimationFrame(rightStep);
 }
 
 /**
