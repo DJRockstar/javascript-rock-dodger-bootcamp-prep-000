@@ -72,15 +72,17 @@ function createRock(x) {
    * This function moves the rock. (2 pixels at a time
    * seems like a good pace.)
    */
+   function moveRockDown(){
+     rock.style.top = `${top += 2}px`;
+     if(top < 380){
+       window.requestAnimationFrame(moveRockDown);
+     }
+   } window.requestAnimationFrame(moveRockDown);
+
   function moveRock() {
     // implement me!
     // (use the comments below to guide you!)
-    function moveRockDown(){
-      rock.style.top = `${top += 2}px`;
-      if(top < 360){
-        window.requestAnimationFrame(moveRockDown);
-      }
-    } window.requestAnimationFrame(moveRockDown);
+
 
     /**
      * If a rock collides with the DODGER,
