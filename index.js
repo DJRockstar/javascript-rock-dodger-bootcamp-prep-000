@@ -47,7 +47,7 @@ function checkCollision(rock) {
                *    and the rock's right edge is > the DODGER's right edge
                */
 
-             (rockLeftEdge < dodgerLeftEdge && rockRightEdge>dodgerLeftEdge)|| (rockLeftEdge > dodgerLeftEdge && rockRightEdge<dodgerRightEdge) || (rockLeftEdge<dodgerRightEdge && rockRightEdge>dodgerRightEdge)
+             (rockLeftEdge <= dodgerLeftEdge && rockRightEdge>=dodgerLeftEdge)|| (rockLeftEdge >= dodgerLeftEdge && rockRightEdge<=dodgerRightEdge) || (rockLeftEdge<=dodgerRightEdge && rockRightEdge>=dodgerRightEdge)
            ) {
       return true
     }
@@ -137,7 +137,10 @@ function endGame() {
   clearInterval(gameInterval);
   document.removeEventListener('keydown', moveDodger)
   ROCKS.forEach(rock => rock.remove());
-  alert('YOU LOSE!');
+  if confirm('YOU LOSE!'){
+    START.innerHTML = 'Play Again?';
+    START.style.display = 'inline'
+  }
 }
 
 function moveDodger(e) {
