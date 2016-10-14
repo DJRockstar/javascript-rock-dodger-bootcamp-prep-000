@@ -87,6 +87,7 @@ function createRock(x) {
      if (checkCollision(rock)){
        endGame();
      }
+
       if (top<GAME_HEIGHT){
        moveRockDown();
      }
@@ -95,7 +96,7 @@ function createRock(x) {
      * Otherwise, if the rock hasn't reached the bottom of
      * the GAME, we want to move it again.
      */
-     else if((positionToInteger(rock.style.top)>GAME_HEIGHT)) {
+      else{
        rock.remove();
      }
 
@@ -117,9 +118,9 @@ function createRock(x) {
   } window.requestAnimationFrame(moveRockDown);
 
   // Add the rock to ROCKS so that we can remove all rocks
-  if(checkCollision()){
+
     ROCKS.push(rock)
-  }
+
   // when there's a collision
 
 
@@ -135,10 +136,9 @@ function createRock(x) {
  */
 function endGame() {
   clearInterval(gameInterval);
+  document.removeEventListener('keydown', moveDodger)
   ROCKS.forEach(rock => rock.remove());
-  var removeDodger = document.getElementById('dodger');
-  removeDodger.remove();
-  alert('YOU LOSE!')
+  alert('YOU LOSE!');
 }
 
 function moveDodger(e) {
