@@ -47,7 +47,7 @@ function checkCollision(rock) {
                *    and the rock's right edge is > the DODGER's right edge
                */
 
-             (rockLeftEdge < dodgerLeftEdge && rockRightEdge>dodgerLeftEdge)|| (rockLeftEdge >= dodgerLeftEdge && rockRightEdge<=dodgerRightEdge) || (rockLeftEdge<dodgerRightEdge && rockRightEdge>dodgerRightEdge)
+             (rockLeftEdge < dodgerLeftEdge && rockRightEdge>dodgerLeftEdge)|| (rockLeftEdge > dodgerLeftEdge && rockRightEdge<dodgerRightEdge) || (rockLeftEdge<dodgerRightEdge && rockRightEdge>dodgerRightEdge)
            ) {
       return true
     }
@@ -79,6 +79,10 @@ function createRock(x) {
 
   function moveRock() {
     // implement me!
+    rock.style.top = `${top += 2}px`;
+    if(top < GAME_HEIGHT){
+      window.requestAnimationFrame(moveRock);
+    }
     // (use the comments below to guide you!)
     /**
      * If a rock collides with the DODGER,
@@ -109,13 +113,8 @@ function createRock(x) {
   }
 
   // We should kick of the animation of the rock around here
-  function moveRockDown(){
-    rock.style.top = `${top += 2}px`;
-    if(top < GAME_HEIGHT){
-      window.requestAnimationFrame(moveRockDown);
-    }
 
-  } window.requestAnimationFrame(moveRockDown);
+      window.requestAnimationFrame(moveRock);
 
   // Add the rock to ROCKS so that we can remove all rocks
 
